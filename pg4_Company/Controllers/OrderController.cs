@@ -63,7 +63,7 @@ namespace Project_TFM10304.Controllers
                         pedate = p.EndDate,
                         cid = p.CompanyUserId
                     })
-                    .Where(o => o.cid == userId && o.pedate <= DateTime.Now).Select(r =>
+                    .Where(o => o.cid == userId && o.pedate <= DateTime.Now.AddDays(100)).Select(r =>
                     new {
                         oid = r.oid,
                         productName = r.productName,
@@ -86,7 +86,7 @@ namespace Project_TFM10304.Controllers
             string userId = thisUser.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             DateTime dts = (sdate == null) ? DateTime.Parse("2000-01-01") : DateTime.Parse(sdate);
-            DateTime dte = (edate == null) ? DateTime.Now : DateTime.Parse(edate);
+            DateTime dte = (edate == null) ? DateTime.Now.AddDays(100) : DateTime.Parse(edate);
 
             var query = _dbContext.Order.Join(_dbContext.OrderDetail, o => o.OrderId, od => od.OrderId, (o, od) => new { id = o.OrderId, pid = od.ProductId, qty = od.Quantity })
                 .Join(_dbContext.Product, o => o.pid, p => p.Id, (o, p) => new { cid = p.CompanyUserId, oid = o.id, productName = p.Name, price = p.Price, quantity = o.qty, psdate = p.StartDate, pedate = p.EndDate })

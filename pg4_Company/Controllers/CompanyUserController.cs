@@ -155,7 +155,7 @@ namespace Project_TFM10304.Controllers
 
                 _dbContext.SaveChanges();
             }
-            return RedirectToAction();
+            return RedirectToAction("Manage", "CompanyUser", null);
         }
     }
 }
