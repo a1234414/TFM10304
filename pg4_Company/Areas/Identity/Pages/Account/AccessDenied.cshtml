@@ -1,0 +1,22 @@
+﻿@page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Access denied";
+}
+
+@*to do: 這個頁面是消費者點到商家專區會跳出來的, redirect to 註冊商家*@
+
+<header>
+    @*<h1 class="text-danger">@ViewData["Title"]</h1>*@
+    <p class="text-danger">請先註冊為商家用戶，再造訪本頁面</p>
+    <p class="text-danger">將於5秒後跳轉至商家註冊頁面...</p>
+    <a href="/CompanyUser/Index">點我前往</a>
+</header>
+
+<script>
+    const myTimeout = setTimeout(redirect, 5000);
+
+    function redirect() {
+        window.location.href = '@Url.Action("Index", "CompanyUser")';
+    }
+</script>

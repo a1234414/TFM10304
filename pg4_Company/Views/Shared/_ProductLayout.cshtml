@@ -1,0 +1,183 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Project_TFM10304.Models.Users> SignInManager
+@inject UserManager<Project_TFM10304.Models.Users> UserManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Papago</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/site2.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        Vue.config.devtools = true;
+    </script>
+    <style>
+        /* Dropdown Button */
+        .dropbtn {
+            color: white;
+            font-size: 16px;
+            border: none;
+        }
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right:0;
+            background-color: #f1f1f1;
+            min-width: 250px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                /* Change color of dropdown links on hover */
+                .dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {
+            background-color: #8cc2f5;
+        }
+
+        .dropdown-menu-end {
+            right: 0;
+            left: auto;
+        }
+
+        .panel {
+            height: 60vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="padding-bottom:60px">
+        <div style="display:flex; justify-content:space-between; width:100%;height:60px;position:fixed;background-color:white;z-index:99999999;">
+            <a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/pic/PAPAG_logo-想趣玩-06.png" class="index-logo"></a>
+            <div style="display:flex;flex-wrap:nowrap;align-items:center">
+                <div id="cartMenu">
+                    <div class="dropdown">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Cartlist">
+                            <img style="width: 32px; height: 32px;align-items:center;" src="~/pic/購物車.png" />
+                            <div class="badge bg-info">{{product.length}}</div>
+                        </a>
+
+                        <div class="dropdown-content" style="overflow-y:scroll">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a asp-area="" asp-controller="Home" asp-action="Cartlist" class="btn btn-primary">查看購物車</a>
+                                </div>
+                                <div class=" panel-body ">
+                                    <div v-for="p in product" class="card" style="width: 17rem;">
+                                        <img :src="p.imagePath" class="card-img-top" alt="">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{p.productName}}</h5>
+                                            <p class="card-text">{{p.description_S}}</p>
+                                            <p class="card-text">{{p.price}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel">
+                                    <div class="card-footer">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <div class="nav-item">
+                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><img style="width:30px;" src="~/img/user-circle-solid.png" /></a>
+                    </div>
+                    <div class="nav-item">
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button type="submit" class="nav-link btn btn-link text-dark"><img style="width:30px;" src="~/img/sign-out-alt-solid.png" /></button>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <div class="nav-item">
+                        <a class="nav-link text-dark" style="font-family: Microsoft YaHei,sans-serif;" asp-area="Identity" asp-page="/Account/Register">注冊</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class="nav-link text-dark" style="font-family: Microsoft YaHei,sans-serif;" asp-area="Identity" asp-page="/Account/UserLogin">登錄</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - Papago - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/js/site1.js"></script>
+    <script>
+        $(function () {
+            $("#btn1").click(function () {
+                $("#btn1").addClass("active");
+                $("#btn2").removeClass("active");
+                $("#table2").hide();
+                $("#table1").show();
+            });
+            $("#btn2").click(function () {
+                $("#btn1").removeClass("active");
+                $("#btn2").addClass("active");
+                $("#table1").hide();
+                $("#table2").show();
+            });
+        });
+        var vcart = new Vue({
+            el: '#cartMenu',
+            data: {
+                product: [],
+                count: 3
+            },
+            mounted: function () {
+                this.GetCartProduct();
+            },
+            methods: {
+                GetCartProduct: function () {
+                    let self = this;
+                    fetch("/tocProduct/GetCart")
+                        .then(function (res) { return res.json() })
+                        .then(function (d) { self.product = d })
+                }
+            }
+        })
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

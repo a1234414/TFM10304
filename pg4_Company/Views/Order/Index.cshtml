@@ -1,0 +1,62 @@
+﻿<div id="orderPanel">
+    <div class="input-group mb-3">
+        <span class="input-group-text">開始日期</span>
+        <input type="date" class="form-control" id="sdate">
+        <span class="input-group-text">結束日期</span>
+        <input type="date" class="form-control" id="edate">
+        <span class="input-group-text" v-on:click="GetOrders">查詢</span>
+        <span class="input-group-text">預計總收入： {{Income}}</span>
+    </div>
+    <div>
+        <table class="table">
+            <tr class="table-primary">
+                <td class="col-md-1">訂單編號</td>
+                <td class="col-md-2">商品名稱</td>
+                <td class="col-md-1">售價</td>
+                <td class="col-md-1">銷售數量</td>
+                <td class="col-md-2">活動開始日期</td>
+                <td class="col-md-2">活動結束日期</td>
+            </tr>
+            <tr v-for="item in myOrders">
+                <td>{{item.oid}}</td>
+                <td>{{item.productName}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.psdate}}</td>
+                <td>{{item.pedate}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#orderPanel',
+        data: {
+            myOrders: [],
+            Income: 0,
+        },
+        mounted: function () {
+            let self = this;
+            fetch('/Order/MyOrders').then(function (res) { return res.json() })
+                .then(function (o) {
+                    self.myOrders = o;
+                    o.forEach(op => self.Income += op.totalPrice);
+                });
+        },
+        methods: {
+            GetOrders: function () {
+                let self = this;
+                let sdate = $('#sdate').val();
+                let edate = $('#edate').val();
+
+                fetch('/Order/GetOrders/' + '?sdate=' + sdate + '&edate=' + edate).then(function (res) { return res.json() })
+                    .then(function (o) {
+                        self.myOrders = o;
+                        self.Income = 0;
+                        o.forEach(op => self.Income += op.totalPrice);
+                    });
+            }
+        }
+    });
+</script>

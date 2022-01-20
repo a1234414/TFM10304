@@ -1,0 +1,592 @@
+﻿<script src="~/js/moment.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.1/main.min.js"></script>
+<link href="~/css/site1.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.1/main.min.css">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<div id="SelectProductInfo">
+    <div id="ProdictContent" style="width:100%;">
+        <div class="container mycontainer">
+            <div style="height:60px; width:100%; display: flex; list-style: none; border-radius: 0.25rem;">
+                <ul class="mybreadcrumb" style="flex-grow: 1; margin: 0; margin-top: 0;">
+                    <li class="nav-item">
+                        <a style="margin-top:10px;font-size:15px;" class="nav-link text-color-dark breadcrumb-hover" asp-area="" asp-controller="Home" asp-action="Index">首頁</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="margin-top: 10px; font-size: 15px;" class="nav-link text-color-dark test breadcrumb-hover" v-for="p in products" >{{p.Name}}</a>
+                    </li>
+                </ul>
+                <ul class="mybreadcrumb" style="margin: 0;margin-top:0;">
+                    <li class="nav-item">
+                        <a style="margin-top: 10px; font-size: 15px;" class="nav-link text-color-dark breadcrumb-hover" v-for="p in products">商品編號:{{p.Id}}</a>
+                    </li>
+                </ul>
+            </div>
+            @*輪播*@<div>
+                      <div class="slideshow-container" style="width:86%; margin-left:7%"  >
+
+                          <div class="mySlides fadeanimation">
+                              <img src="~/pic/product/3_4.jpeg" style="width: 100%; height: 300px; object-fit: cover;" />
+                          </div>
+
+
+                          <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                          <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                      </div>
+                <br>
+                <div style="text-align:center">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                </div>
+            </div>
+        </div>
+        <div class="myproduct">
+            <div class="myproduct-left">
+                <div class="myproduct-left-container">
+                    <div  class="info-title" v-for="p in products">{{p.Name}}</div>
+                    <div>
+                        <ul style="display: flex; flex-grow: 1; justify-content: flex-start; margin-top: 1rem; list-style: none; border-radius: 0.25rem; padding:0;">
+                            <li class="nav-item" style="padding:0">
+                                <a class="text-color-dark breadcrumb-hover" style="display: block; font-size: 10px; padding-top:10px" asp-area="" asp-controller="Home" asp-action="Index">首頁</a>
+                            </li>
+                            <li class="nav-item" style="padding:0">
+                                <a class="text-color-dark test breadcrumb-hover" style="display: block; font-size: 10px; padding-top: 10px " v-for="p in products">{{p.Name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <hr />
+                    <div style="margin-top: 35px; margin-bottom: 35px;">
+                        <div>
+                            <span style="font-size: 15px;  ">14天前可免費取消</span>
+                            <span style="font-size: 15px; padding-left: 30px; ">現場請出示電子憑證</span>
+                        </div>
+                    </div>
+                    <hr />
+
+                    <pre style="margin-top:30px;font-size:14px;" v-for="p in products">
+{{p.Description_S}}
+{{p.Description_L}}
+{{p.Description_L_1}}
+{{p.Description_L_2}}
+{{p.Description_L_3}}
+                    </pre>
+                    <div style="display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; margin-top: 40px;">
+                        <div style="font-size:20px;font-weight:600;">旅客評價</div>
+                        <div style="font-size:14px;">更多評價 ></div>
+                    </div>
+                    <div style="display:flex; flex-wrap:nowrap;height:80px;align-items:center;">
+                        <div style="height: 70%; width:8%;margin-right:3%;">
+                            <img style="border-radius: 50%; width:110%; height: 100%; object-fit: cover " v-for="p in products" v-bind:src="''+p.ProductPic.PicPath" />
+                        </div>
+                        <div style="height:50px;">
+                            <div>Katrina</div>
+                            <div>評價:4.9 · 2021/12/17 · 好友</div>
+                        </div>
+                    </div>
+                    <div style="margin-left:11%; background-color:rgba(200, 200, 200, 0.2);">
+                        <div style="font-size:17px;font-weight:600;margin-left:10px;">營區舒適，老闆人很nice</div>
+                        <div style="font-size:15px;margin-left:10px;margin-top:8px;">
+                            懶人露營的首選～ 海拔不會太高，當天剛好遇到強風所以才比較冷，多帶件禦寒的外套即可。營帳內很溫暖。 提供晚餐烤肉的食材與隔日早餐，如果比較容易餓可以再自行攜帶食物。 洗手間與浴室都很乾淨。
+                        </div>
+                        <div style="font-size:12px;margin-left:10px;margin-top:8px;">
+                            展開
+                        </div>
+                        <div style="font-size:12px;margin-left:10px;margin-top:8px;">於 2021/12/28 評價</div>
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="myproduct-right" style="padding-bottom:20px;">
+                <div class="myproduct-right-container" style="margin-left:20px;">
+                    <fieldset style="border: 1px solid #d3d3d3; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; padding:10px;padding-bottom:20px;">
+                        <div style="font-size:20px; font-weight:600; margin-left:20px; flex-basis:100%;" v-for="p in products">TWD {{slicePrice(p.Price)}} 起</div>
+                        <div style="margin-top: 10px; margin-left: 20px; flex-basis: 100%;"><span>評價:4.9</span><span v-for="p in products">已售出 {{p.TotalStock-p.StockForSale}}</span></div>
+                        <button class="Productbtn" onclick="scrollto2('sel-pro')" style="margin-top:5px; width:90%; height:50px;">選擇方案</button>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div style="background-color: rgba(200, 200, 200, 0.2); padding-bottom: 6%; ">
+            <div id="sel-pro" style="width:94%; font-size:30px; margin-left:6%;padding-top:2%; margin-bottom:1%;" class="info-title">選擇方案</div>
+            <div style="margin-left: 6%; margin-right: 6%; background-color: #ffffff; ">
+                <div id="Order" class="myproduct">
+                    <div class="myproduct-left" style="display:flex; align-items: center; flex-direction:row;flex-wrap:wrap; margin:30px;">
+                        <div style="width: 100%; font-size: 20px; margin-left:2%;">小資鐘型帳 14天前可免費取消</div>
+                        <ul style="margin:0;">
+                            <li>帳篷規格：直徑 400 cm x H 250 cm</li>
+                            <li>一帳最多可住 4 人，恕無法增加</li>
+                        </ul>
+                    </div>
+                    <div class="myproduct-right" style="display:flex; justify-content:flex-end; align-items:center;">
+                        <div>
+                            <div v-for="p in products">
+                                TWD {{slicePrice(p.Price)}} 起
+                                <button class="Productbtn" id="Selbtn" onclick="Select()" style="height:50px;width:120px;margin-left:10px; margin-right:20px;">選擇</button>
+                            </div>
+                            <div style="margin-top:15px; display:flex; justify-content:flex-end; margin-right:20px;"v-for="p in products">最早可預訂日: {{p.StartDate}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="cal1" style="display:flex; flex-direction:row;flex-wrap:nowrap;">
+                    <div id="calendar" style="width:58%; margin-left:4%;"></div>  @*日曆*@
+                    <div style="margin-left:3%;width:45%;">
+                        <div>入住人數</div>
+                        <div style="display:flex; flex-direction:row;flex-wrap:nowrap;">
+                            <button class="Productbtn" id="btn_toggle1" onclick="Cal(1)" style="width: 15%; height: 38px;">1</button>
+                            <button class="Productbtn" id="btn_toggle2" onclick="Cal(2)" style="width: 15%; height: 38px; margin-left: 4%">2</button>
+                            <button class="Productbtn" id="btn_toggle3" onclick="Cal(3)" style="width: 15%; height: 38px; margin-left: 4%">3</button>
+                        </div>
+                        <div style="margin-top: 5%">選擇數量</div>
+                        <div style="display:flex; flex-direction:row;flex-wrap:nowrap;align-content:center;align-items:center;">
+                            <div style="flex-basis:40%;font-weight:600;">間數</div>
+                            <div v-for="p in products">TWD {{slicePrice(p.Price)}} 起/每間</div>
+                            <div style="display: flex; flex-direction: row; flex-wrap: nowrap; align-content: center; align-items: center; margin:10px;">
+                                <button class="Productbtn" id="minus" onclick="Minus()" >-</button>
+                                <div id="num" style="margin:10px;">1</div>
+                                <button class="Productbtn" id="plus" onclick="Plus()"> + </button>
+                            </div>
+                        </div>
+                        <div style="margin-top:5%; display:flex; flex-direction:row;flex-wrap:nowrap;align-content:center;align-items:center;">
+                            <div style="flex-basis:80%;">總價格</div>
+                            <div style="width:15%;display:flex; flex-direction:row;flex-wrap:nowrap;justify-content:flex-end;">
+                                <div style="font-size:20px;">TWD</div>
+                                <div id="price" style="font-size: 20px; margin-left: 5%">0</div>
+
+                            </div>
+                        </div>
+                        <div style="margin-top:5%; display:flex; flex-direction:row;flex-wrap:nowrap;align-content:center;align-items:center;justify-content:flex-end;" v-for="p in products">
+                            <button v-on:click="addToCart(p.Id)" style="margin-right:2%;" class="Productbtn" >加入購物車</button>
+                            <button v-on:click="AddAndToCart(p.Id)"  style="margin-right:3%;" class="Productbtn">立即訂購</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Start*@
+
+    <div id="pricebar" class="fixed-bar" style="display:none">
+        <div class="flex">
+            <div id="booking-bar" class="flex-left">
+                TWD 5,500 起
+            </div>
+            <div class="flex-right">
+                <button onclick="scrollto2('sel-pro')">選擇方案</button>
+            </div>
+        </div>
+    </div>
+
+
+    @*訂購細項*@
+
+    <div id="ProdictDetail">
+        <div class="container" >
+            <div class="row">
+                <div class="col-md-8">
+                    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" tabindex="0">
+                        <div id="list-item-1" class="info-section">
+                            <h2 class="info-title">商品說明</h2>
+                            <div class="info-sec-collapsable" v-for="p in products">
+                                {{p.Description_S}}
+                                {{p.Description_L}}
+                                {{p.Description_L_1}}
+                                {{p.Description_L_2}}
+                                {{p.Description_L_3}}
+                            </div>
+                        </div>
+                        <div id="list-item-2" class="info-section">
+                            <h2 class="info-title">購買須知</h2>
+                            <div class="info-sec-collapsable" v-for="p in products">
+                                {{p.Description_S}}
+                                {{p.Description_L}}
+                                {{p.Description_L_1}}
+                                {{p.Description_L_2}}
+                                {{p.Description_L_3}}
+                            </div>
+                        </div>
+
+                        <div id="list-item-3" class="info-section">
+                            <h2 class="info-title">兌換地點</h2>
+                            <div class="info-sec-collapsable" v-for="p in products">
+                                {{p.Description_S}}
+                                {{p.Description_L}}
+                                {{p.Description_L_1}}
+                                {{p.Description_L_2}}
+                                {{p.Description_L_3}}
+                            </div>
+                        </div>
+
+                        <div id="list-item-4" class="info-section">
+                            <h2 class="info-title">如何使用</h2>
+                            <div class="info-sec-collapsable" v-for="p in products">
+                                {{p.Description_S}}
+                                {{p.Description_L}}
+                                {{p.Description_L_1}}
+                                {{p.Description_L_2}}
+                                {{p.Description_L_3}}
+                            </div>
+                        </div>
+
+                        <div id="list-item-5" class="info-section">
+                            <h2 class="info-title">體驗地點</h2>
+                            <div class="info-sec-collapsable" v-for="p in products">
+                                {{p.Description_S}}
+                                {{p.Description_L}}
+                                {{p.Description_L_1}}
+                                {{p.Description_L_2}}
+                                {{p.Description_L_3}}
+                            </div>
+                        </div>
+
+                        <div id="list-item-6" class="info-section">
+                            <h2 class="info-title">取消政策</h2>
+                            <div class="info-sec-collapsable" v-for="p in products">
+                                {{p.Description_S}}
+                                {{p.Description_L}}
+                                {{p.Description_L_1}}
+                                {{p.Description_L_2}}
+                                {{p.Description_L_3}}
+                            </div>
+                        </div>
+
+                        <div id="list-item-7" class="info-section">
+                            <h2 class="info-title">旅客評價</h2>
+                            <div class="info-sec-collapsable" v-for="p in products">
+                                {{p.Description_S}}
+                                {{p.Description_L}}
+                                {{p.Description_L_1}}
+                                {{p.Description_L_2}}
+                                {{p.Description_L_3}}
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-md-offset-1">
+                    <div id="listA" class="affix">
+                        <a class="list-group-item list-group-item-action" onclick="scrollto2('list-item-1')">商品說明</a>
+                        <a class="list-group-item list-group-item-action" onclick="scrollto2('list-item-2')">購買須知</a>
+                        <a class="list-group-item list-group-item-action" onclick="scrollto2('list-item-3')">兌換地點</a>
+                        <a class="list-group-item list-group-item-action" onclick="scrollto2('list-item-4')">如何使用</a>
+                        <a class="list-group-item list-group-item-action" onclick="scrollto2('list-item-5')">體驗地點</a>
+                        <a class="list-group-item list-group-item-action" onclick="scrollto2('list-item-6')">取消政策</a>
+                        <a class="list-group-item list-group-item-action" onclick="scrollto2('list-item-7')">旅客評價</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @*End*@
+
+    <div style="margin-bottom:50px;"></div>
+</div>
+<script>
+    var pos = 0;
+
+    function scrollto(a) {
+        var elem = document.getElementById(a);
+        elem.scrollIntoView(a);
+    }
+
+    function scrollto2(a) {
+        const yOffset = -100;
+        const element = document.getElementById(a);
+        var y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        if (a == 'sel-pro') {
+            y = y + 25;
+        }
+        window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+
+    function fixFunction() {
+        if (document.body.scrollTop > yPosition  + pos || document.documentElement.scrollTop > yPosition  + pos) {
+            document.getElementById("listA").classList.add('affixed');
+
+            //document.getElementById("listA").className = "affixed";
+        } else {
+            document.getElementById("listA").classList.remove('affixed');
+
+            //document.getElementById("listA").className = "affix";
+        }
+    }
+
+    function fix2Function() {
+        if (document.body.scrollTop > yPosition  + pos || document.documentElement.scrollTop > yPosition  + pos) {
+
+            document.getElementById("pricebar").style.display = "block";
+            //document.getElementById("listA").className = "affixed";
+        } else {
+
+            document.getElementById("pricebar").style.display = "none";
+            //document.getElementById("listA").className = "affix";
+        }
+    }
+
+    var calendar;
+    var UnitPrice = 0;
+
+    var Select = function () {
+        if (document.getElementById('cal1').style.display == "none") {
+            document.getElementById('cal1').style.display = "flex";
+            document.getElementById('Selbtn').innerText = '取消選擇';
+            pos = 500;
+        } else {
+            document.getElementById('cal1').style.display = "none";
+            document.getElementById('Selbtn').innerText = '選擇';
+            pos = 0;
+        }
+    }
+
+    var Plus = function () {
+        var event = calendar.getEventById(Btn_Flag);
+        var eventTitle = event.title;
+        document.getElementById('num').innerText = parseInt(document.getElementById('num').innerText) + 1;
+        if (eventTitle.indexOf("起") == -1) {
+            document.getElementById('price').innerText = UnitPrice * parseInt(document.getElementById('num').innerText);
+        }
+    }
+
+    var Minus = function () {
+        var event = calendar.getEventById(Btn_Flag);
+        var eventTitle = event.title;
+        if (parseInt(document.getElementById('num').innerText) > 1) {
+            document.getElementById('num').innerText = parseInt(document.getElementById('num').innerText) - 1;
+            if (eventTitle.indexOf("起") == -1) {
+                document.getElementById('price').innerText = UnitPrice * parseInt(document.getElementById('num').innerText);
+            }
+        }
+    }
+
+
+
+
+    var Cal = function (i) {
+        var btn_toggle_name = "btn_toggle" + i;
+        for (var b = 0; b <= leap1; b++) {
+            var event = calendar.getEventById(b);
+            var eventTitle = event.title;
+            if (eventTitle.indexOf("起") != -1 && !document.getElementById(btn_toggle_name).classList.contains('btn')) {
+                var temp = eventTitle.substring(0, eventTitle.length - 1);
+                event.setProp('title', temp);
+                document.getElementById('price').innerText = UnitPrice * parseInt(document.getElementById('num').innerText);
+            } else if (eventTitle.indexOf("起") == -1 && document.getElementById(btn_toggle_name).classList.contains('btn')) {
+                var temp1 = eventTitle + '起';
+                event.setProp('title', temp1);
+                document.getElementById('price').innerText = 0;
+
+            }
+        }
+        for (var a = 1; a < 4; a++) {
+            var btn_name = "btn_toggle" + a;
+            if (a != i) {
+                document.getElementById(btn_name).classList.remove('btn');
+                document.getElementById(btn_name).classList.remove('btn-primary');
+            }
+        };
+        document.getElementById(btn_toggle_name).classList.toggle('btn');
+        document.getElementById(btn_toggle_name).classList.toggle('btn-primary');
+    }
+
+    var Start = moment().startOf('month');
+    var End = moment().endOf('month');
+    var Now = moment().startOf('day');
+    var leap = Now.diff(Start, 'days');
+    var leap1 = End.diff(Start, 'days');
+
+    function getdays() {
+        var Date1 = new Date();
+        Date1.setMonth(Date1.getMonth() + 1);
+        Date1.setDate(0);
+        var daycount = Date1.getDate();
+        return daycount;
+    }
+
+
+    var eventAdd = [];
+    for (var i = 0; i < getdays(); i++) {
+        if (i <= leap) {
+            eventAdd.push({
+                id: i,
+                title: '5500',
+                start: moment().subtract(leap - i, 'days').format('YYYY-MM-DD'),
+                color: 'white',
+                textColor: 'black',
+                resourceId: i
+            })
+        } else {
+            eventAdd.push({
+                id: i,
+                title: '5500起',
+                start: moment().add(i - leap, 'days').format('YYYY-MM-DD'),
+                color: 'white',
+                textColor: 'black',
+                resourceId: i
+            })
+        }
+    }
+
+    var resourceAdd = [];
+    for (var i = 0; i < 31; i++) {
+        resourceAdd.push({
+            id: i,
+            title: 'Resource' + i
+        })
+    }
+    var Btn_Flag = 1;
+    var ChangeFlag = 0;
+    var priceChangeRes = function (info) {
+        var Index = parseInt(info.dateStr.substring(info.dateStr.length - 2));
+        var event = calendar.getEventById(Index - 1);
+        var eventTemp = 0;
+        var eventTitle = event.title;
+        ChangeFlag = 0;
+        if (eventTitle.indexOf("起") != -1) {
+            UnitPrice = parseInt(eventTitle.substring(0, eventTitle.length - 1));
+        } else {
+            UnitPrice = parseInt(eventTitle);
+            ChangeFlag = 1;
+        }
+        for (var c = 0; c <= leap1; c++) {
+            eventTemp = calendar.getEventById(c);
+            eventTemp.setProp('color', 'white');
+        }
+        if (event.backgroundColor == 'red') {
+            event.setProp('color', 'white');
+            UnitPrice = 0;
+            ChangeFlag = 1;
+            Btn_Flag = Index;
+        } else {
+            event.setProp('color', 'red');
+        }
+        if (ChangeFlag == 1) {
+            document.getElementById('price').innerText = UnitPrice * parseInt(document.getElementById('num').innerText);
+        }
+
+    }
+    var priceChangeEve = function (info) {
+        var Index = parseInt(info.event.startStr.substring(info.event.startStr.length - 2));
+        var event = calendar.getEventById(Index - 1);
+        var res = calendar.getResourceById(Index - 1);
+        var eventTitle = event.title;
+        if (eventTitle.indexOf("起") != -1) {
+            UnitPrice = parseInt(eventTitle.substring(0, eventTitle.length - 1));
+        } else {
+            UnitPrice = parseInt(eventTitle);
+        }
+    }
+
+    var calendar;
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        calendar = new FullCalendar.Calendar(calendarEl, {
+            schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+            initialView: 'dayGridMonth',
+            editable: true,
+            resources: resourceAdd,
+            events: eventAdd,
+            dateClick: priceChangeRes,
+            eventClick: priceChangeEve
+        });
+        calendar.render();
+        console.log('calendar建立');
+        document.getElementById('cal1').style.display = "none";
+    });
+
+
+    //=====================VUE========================//CHUN
+    var app = new Vue({
+        el: '#SelectProductInfo',
+        data: {
+            products: []
+        },
+        methods: {
+            slicePrice: function (UPrice) {
+                var num = 0;
+                var tempPrice = 0;
+                var temp = [];
+                var truePrice;
+                if (UPrice.toString().length <= 3) {
+                    truePrice = UPrice;
+                }
+                else {
+                if (UPrice.toString().length % 3 != 0) {
+                    num = parseInt(UPrice.toString().length / 3);
+                } else {
+                    num = parseInt(UPrice.toString().length) / 3 - 1;
+                }
+                tempPrice = UPrice;
+                for (var i = num; i > 0; i--) {
+                    if (tempPrice.toString().length > 3) {
+                        temp[i] = tempPrice.toString().slice(-3);
+                    }
+                    tempPrice = tempPrice.toString().substring(0, tempPrice.toString().length - 3);
+                    temp[0] = tempPrice;
+                }
+                truePrice = temp[0];
+                for (var j = 1; j < num + 1; j++) {
+                    truePrice += ("," + temp[j]);
+                    }
+                }
+                return truePrice;
+            },
+            addToCart: function (id) {
+                let data = new FormData();
+                data.append("id", id);
+                fetch("/tocProduct/AddProductToCart", {
+                    body: data, // must match 'Content-Type' header
+                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                }).then(response => response.text())
+                    .then(function (d) {
+                        alert(d);
+                        window.location.href = '/Product/Product/ProductIndex'
+                    });
+            },
+            AddAndToCart: function (id) {
+                let data = new FormData();
+                data.append("id", id);
+                fetch("/tocProduct/AddProductToCart", {
+                    body: data, // must match 'Content-Type' header
+                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                }).then(response => response.text())
+                    .then(function (d) {
+                        alert(d);
+                        window.location.href = "/Home/Cartlist"
+                    });
+            },
+            GetProduct: function () {
+                let self = this;
+                fetch('/Product/Product/GetSelectProductPage').then(function (r) { return r.json() })
+                    .then(function (r) { self.products = r; console.log("GetProduct then") });
+            }
+        },
+
+        mounted: function () {
+            let self = this;
+            fetch('/Product/Product/GetSelectProductPage').then(function (r) { return r.json() })
+                .then(function (r) { self.products = r; console.log(app.$data.products[0].Price) });
+        }
+    })
+
+
+     //=====================VUE========================//CHUN
+
+</script>
+
+
+
+
+
+
+

@@ -1,0 +1,196 @@
+﻿<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+
+<style>
+    #lab {
+        font-size: x-large;
+    }
+</style>
+
+<h1><i class="bi bi-pencil-square"></i> 商品編輯</h1>
+<hr />
+
+<form action="~/Product/EditUpdate" method="post" enctype="multipart/form-data">
+    <div class="container" id="EditTable">
+
+        <div class="form-group">
+            <label for="name" class="form-label" id="lab">課程名稱</label>
+            <input class="form-control" type="text" id="name" v-model="products.name" name="name" required />
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" name="Price" id="lab">課程訂價</label>
+            <input class="form-control" type="number" name="Price" v-model="products.price" required />
+        </div>
+
+
+        <div class="form-group">
+            <label for="name" class="form-label" id="lab">課程類別</label>
+            <input class="form-control" type="text" id="type" v-model="products.type" name="type" />
+        </div>
+
+        <div class="form-group">
+            <label for="name" class="form-label" id="lab">課程區域</label>
+            <input class="form-control" type="text" id="location" v-model="products.location" name="location" />
+        </div>
+
+
+
+        <div class="form-group">
+            <label class="form-label" name="Description_S" id="lab">課程簡述</label>
+            <textarea class="form-control" name="Description_S" v-model="products.description_S"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" name="Description_L" id="lab">課程詳述</label>
+            <textarea class="form-control" name="Description_L" v-model="products.description_L" rows="10" cols="20"></textarea>
+        </div>
+
+
+        <div class="form-group">
+            <label class="form-label" name="Description_L_1" id="lab">課程詳述1</label>
+            <textarea class="form-control" name="Description_L_1" v-model="products.description_L_1" rows="10" cols="20"></textarea>
+        </div>
+
+
+        <div class="form-group">
+            <label class="form-label" name="Description_L_2" id="lab">課程詳述2</label>
+            <textarea class="form-control" name="Description_L_2" v-model="products.description_L_2" rows="10" cols="20"></textarea>
+        </div>
+
+
+        <div class="form-group">
+            <label class="form-label" name="Description_L_3" id="lab">課程詳述3</label>
+            <textarea class="form-control" name="Description_L_3" v-model="products.description_L_3" rows="10" cols="20"></textarea>
+        </div>
+
+
+        <div class="form-group">
+            <label class="form-label" name="Description_L_4" id="lab">課程詳述4</label>
+            <textarea class="form-control" name="Description_L_4" v-model="products.description_L_4" rows="10" cols="20"></textarea>
+        </div>
+
+
+        <div class="form-group">
+            <label class="form-label" name="Description_L_5" id="lab">課程詳述5</label>
+            <textarea class="form-control" name="Description_L_5" v-model="products.description_L_5" rows="10" cols="20"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" name="StartDate" id="lab">活動開始日期</label>
+            <input class="form-control" type="datetime-local" name="StartDate" v-model="products.startDate" />
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" name="EndDate" id="lab">活動結束日期</label>
+            <input class="form-control" type="datetime-local" name="EndDate" v-model="products.endDate" value="" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" name="IsSold" id="lab">是否上架</label>
+            <input type="checkbox" name="IsSold" value="true" v-model="products.isSold" />
+        </div>
+
+
+        <div>
+            <label class="form-label" id="lab">課程圖</label>
+      
+
+            <div class="row">   <!---商品圖 Card--->
+                <div class="col-sm-6" v-for="pic in productPics" style="margin-top: 1%;">
+                    <div class="card" style="width:auto;">
+                        <img v-bind:src="''+pic.picPath" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <center>
+                                <button type="button" class="btn btn-danger" v-on:click="delePic(pic.id)">移除</button>
+                                <input type="file" name="PicPath" v-on:change="updatePic(pic.id)" />  <!---上傳變更圖片--->
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div>
+                <label class="form-label" id="lab">上傳</label>
+                <input class="form-control" type="file" name="Pic" multiple="multiple" />
+            </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit">確認修改</button>
+        <button class="btn btn-dark" onclick="location.href='/Product/MyProducts'">取消修改</button>
+    </div>
+
+</form>
+
+
+<script>
+
+
+    var app = new Vue({
+
+        el: '#EditTable',
+        data: {
+            products: [],
+            productPics: [],
+            pdId:''
+        },   ///data
+
+        mounted: function () {
+            var self = this;
+            fetch("/Product/GetPdSession")
+                .then(function (res) { return res.json() })
+                .then(function (d) {
+                    self.products = d[0]
+                    self.pdId = d[0].id
+                })
+
+            fetch("/Product/GetPic")
+                .then(function (res) { return res.json() })
+                .then(function (d) { self.productPics = d })
+
+
+        }, //mounted
+
+        methods: {
+            delePic: function (id) {
+                let self = this;
+                console.log("PicId: " + id);
+                var x = confirm("確認刪除圖片?");
+                if (x != true)
+                    return false;
+         
+                let data = new FormData();
+                data.append("id", id);   //key value
+
+                fetch("DeletePic", {
+                    body: data,
+                    method: "POST",
+                });
+                alert("已刪除圖片");
+                fetch("/Product/GetPic")
+                    .then(function (res) { return res.json() })
+                    .then(function (d) { self.productPics = d })
+            },
+
+            updatePic: function (id) {
+                let self = this;
+                console.log("PicId: " + id);
+                alert("123");
+                let data = new FormData();
+                data.append("id", id);   //key value
+                fetch("UpdatePic", {
+                    body: data,
+                    method: "POST",
+                });
+
+
+            }
+        }//methods
+
+    })//vue
+
+</script>

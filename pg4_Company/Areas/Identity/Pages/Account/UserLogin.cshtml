@@ -1,0 +1,168 @@
+﻿@page
+@model LoginModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Project_TFM10304.Models.Users> SignInManager
+@inject UserManager<Project_TFM10304.Models.Users> UserManager
+
+<script src="~/js/draw.js"></script>
+<script>
+    function Change_LoginSize() {
+        var loginheight = window.innerHeight;
+        for (var i = 1; i <= 3; i++) {
+            var login_idwidth = $("#login_id")[0].clientWidth;
+            $("#fb_btn" + i).css("width", login_idwidth);
+        }
+        $(".login-body-user").css("height", loginheight);
+    }
+</script>
+@if (SignInManager.IsSignedIn(User))
+{
+    <script>
+        window.onload = function () {
+            window.location.replace("https://localhost:44316/")
+        }
+    </script>
+}
+else
+{
+    <div class="login-body-user">
+        <div class="login">
+            <div style="width:100%;padding-left:30px;padding-right:30px;">
+                <div style="width:100%">
+                    <form id="account" class="form" method="post">
+                        <h2 style="color: #626C75; font-weight: bolder; font-family: Microsoft YaHei,sans-serif;">登入</h2>
+                        <div class="loginGroup">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <label>
+                                帳號
+                                <input id="login_id" asp-for="Input.Email" class="form-control" placeholder="請輸入電子信箱">
+                            </label>
+                        </div>
+                        <div class="loginGroup">
+                            <label>
+                                密碼
+                                <input asp-for="Input.Password" class="form-control" placeholder="請輸入密碼">
+                            </label>
+                        </div>
+                        <div class="loginGroup">
+                            <label>
+                                驗證碼
+                                <span style="display:flex;flex-wrap:nowrap;">
+                                    <input type="text" value="" placeholder="請輸入驗證碼（不區分大小寫）" class="input-val" required="required" data-val="true" data-val-required="必須填寫驗證碼">
+                                    <canvas  id="canvas" width="100" height="30"></canvas>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label style="margin: 0; font-weight: 400; font-size: 14px; color: #626C75;" asp-for="Input.RememberMe">
+                                <input asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                <a style="font-weight:400; font-size:14px; color: #626C75; margin-left:150px; text-decoration: none" id="forgot-password" asp-page="./ForgotPassword">Forgot Password?</a>
+                            </label>
+                        </div>
+                        <div style="display:flex;flex-wrap:nowrap;align-items:center">
+                            <button type="submit" id="vertify" class="vertify-btn">提交</button>
+                            <button type="button" style="margin-left:20px" onclick="backhome()" class="vertify-btn">取消</button>
+                        </div>
+                        <div style="display:flex;justify-content:space-around">
+
+                        </div>
+                    </form>
+                </div>
+                <hr class="middle-line"/>
+                <div style="margin-top:10px;">
+                    @{
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <div>
+                                <p style="display:flex;flex-wrap:wrap;">
+                                    @foreach (var provider in Model.ExternalLogins)
+                                    {
+                                        if (provider.Name == "Facebook")
+                                        {
+                                            <button id="fb_btn1" type="submit" style="background-color:#0678BF" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">以 @provider.DisplayName 帳號進行登錄</button>
+
+                                        }
+                                    }
+
+
+                                </p>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+    $(document).ready(Change_LoginSize());
+    function backhome() {
+        window.location.replace("https://localhost:44316/");
+    }
+</script>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="container-fluid">
+    <div>
+        <section>
+            <form id="account" method="post">
+                <h4>請登入您的帳號</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Password">密碼</label>
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="Input.RememberMe">
+                            <input asp-for="Input.RememberMe" />記住我-->
+                            @*@Html.DisplayNameFor(m => m.Input.RememberMe)*@
+                        <!--</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Log in</button>
+                </div>
+                <div class="form-group">
+                    <p>
+                        <a id="forgot-password" asp-page="./ForgotPassword">忘記密碼</a>
+                    </p>
+                    <p>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">註冊新會員</a>
+                    </p>
+                    <p>
+                        <a asp-area="" asp-controller="CompanyUser" asp-action="Index">註冊為商家</a>
+                    </p>-->
+                    @*重寄認證信*@
+                    @*<p>
+                            <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                        </p>*@
+                <!--</div>
+            </form>
+        </section>
+    </div>
+</div>-->
+

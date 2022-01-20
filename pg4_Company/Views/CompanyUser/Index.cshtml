@@ -1,0 +1,53 @@
+﻿<h1 class="m-md-3">PAPAGO商家註冊</h1>
+
+<div class="container-fluid">
+    <form method="post" action="~/CompanyUser/Register">
+        <hr />
+        <div class="text-danger"></div>
+        <div class="form-group">
+            <label>聯絡信箱</label>
+            <input class="form-control" type="text" name="Email" required />
+        </div>
+        <div class="form-group">
+            <label>密碼</label>
+            <input class="form-control" type="password" name="Password" required />
+        </div>
+        <div class="form-group">
+            <label>確認密碼</label>
+            <input class="form-control" type="password" name="ConfirmPassword" required />
+        </div>
+        <div class="form-group">
+            <label>統一編號</label>
+            <input class="form-control" type="text" placeholder="請填入8碼統一編號" name="TaxId" required />
+        </div>
+        <div class="form-group">
+            <label>公司名稱</label>
+            <input class="form-control" type="text" name="CompanyName" required />
+        </div>
+        <div class="form-group">
+            <label>法定公司名稱</label>
+            <input class="form-control" type="text" name="LegalName" required />
+        </div>
+        <div class="form-group">
+            <label>聯絡電話</label>
+            <input class="form-control" type="text" name="ContactNumber" required />
+        </div>
+        <div class="form-group">
+            <label>郵遞區號</label>
+            <input class="form-control" type="text" name="PostalCode" />
+        </div>
+        <div class="form-group">
+            <label>所在國家</label>
+            <input class="form-control" type="text" name="Nation" />
+        </div>
+        <div class="form-group">
+            <label>城市</label>
+            <input class="form-control" type="text" name="City" />
+        </div>
+        <div class="form-group">
+            <label>聯絡地址</label>
+            <input class="form-control" type="text" name="Address" />
+        </div>
+        <button type="submit" class="btn btn-primary">註冊</button>
+    </form>
+</div>

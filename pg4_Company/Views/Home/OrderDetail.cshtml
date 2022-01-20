@@ -1,0 +1,81 @@
+﻿<div class="container-fluid" id="orderDetailPanel">
+    <div>
+        <div>
+            <h3>訂單詳情</h3>
+            <table class="table">
+                <tr>
+                    <td>訂單編號: </td>
+                    <td>{{orderDetail.OrderId}}</td>
+                </tr>
+                <tr>
+                    <td>收件人姓名: </td>
+                    <td>{{orderDetail.fReceiver}}</td>
+                </tr>
+                <tr>
+                    <td>收件人地址: </td>
+                    <td>{{orderDetail.fAddress}}</td>
+                </tr>
+                <tr>
+                    <td>連絡電話: </td>
+                    <td>{{orderDetail.fPhone}}</td>
+                </tr>
+                <tr>
+                    <td>連絡信箱: </td>
+                    <td>{{orderDetail.fEmail}}</td>
+                </tr>
+            </table>
+
+            <div>購買商品: </div>
+
+            <table class="table">
+                <tr>
+                    <td>商品名稱</td>
+                    <td>商品單價</td>
+                    <td>購買數量</td>
+                    <td>小計</td>
+                </tr>
+                <tr v-for="p in orderDetail.OrderDetail">
+                    <td>{{p.Name}}</td>
+                    <td>{{p.Price}}</td>
+                    <td>{{p.Quantity}}</td>
+                    <td>{{p.Price * p.Quantity}}</td>
+                </tr>
+            </table>
+        </div>
+        <form method="post" action="~/Home/SpgatewayPayBill">
+            <div class="col-md-12 md-block">
+                <label>總額</label>
+                <input type="number" class="form-control" v-model="orderDetail.Amount" readonly>
+            </div>
+            <div class="col-md-12">
+                <label>請款類型</label>
+                <select name="PayType">
+                    <option value="CREDIT">信用卡</option>
+                    <option value="WEBATM">WEBATM</option>
+                    <option value="VACC">ATM 轉帳</option>
+                    <option value="CVS">超商代碼繳費</option>
+                    <option value="BARCODE">超商條碼繳費</option>
+                </select>
+            </div>
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success">去付款</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#orderDetailPanel',
+        data: {
+            orderDetail: [],
+        },
+        mounted: function () {
+            let self = this;
+            fetch('/Home/GetOrderDetail').then(function (r) { return r.json() }).then(function (r) { self.orderDetail = r[0] });
+        },
+        methods: {
+
+        }
+    })
+</script>

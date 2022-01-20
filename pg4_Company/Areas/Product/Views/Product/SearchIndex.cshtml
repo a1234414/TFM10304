@@ -1,0 +1,993 @@
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<link href="~/css/animate.css" rel="stylesheet" />
+
+<div class="section--banner">
+    <img alt="city image" class="section--banner__image" data-src="https://image.kkday.com/v2/image/get/w_1900%2Ch_650%2Cc_fill%2Cq_55%2Ct_webp/s1.kkday.com/campaign_1345/20210204034847_MwMNE/jpg" src="https://image.kkday.com/v2/image/get/w_1900%2Ch_650%2Cc_fill%2Cq_55%2Ct_webp/s1.kkday.com/campaign_1345/20210204034847_MwMNE/jpg" lazy="loaded"> <canvas width="1" height="1" class="section--banner__mask"></canvas>
+    <div class="section--container section--banner__info">
+        <div class="section--banner__title">
+            台北
+        </div>
+        <h1 class="section--banner__sub-title">
+            台北自由配活動課程
+        </h1>
+    </div>
+</div>
+
+
+
+<div class="product-bar">
+    <div class="product-bar-item">
+        <a href="https://www.google.com/" style="text-decoration:none;"><img class="product-bar-img" src="~/img/table-tennis-solid.png" /></a>
+        <a class="product-bar-item-title" href="https://www.google.com/"style="text-decoration:none;">
+            室內運動
+        </a>
+    </div>
+    <div class="product-bar-item">
+        <a href="https://www.google.com/" style="text-decoration:none;"><img class="product-bar-img" src="~/img/pagelines-brands.png" /></a>
+        <a class="product-bar-item-title" href="https://www.google.com/"style="text-decoration:none;">
+            花藝
+        </a>
+    </div>
+    <div class="product-bar-item">
+        <a href="https://www.google.com/" style="text-decoration:none;"><img class="product-bar-img" src="~/img/gavel-solid.png" /></a>
+        <a class="product-bar-item-title" href="https://www.google.com/"style="text-decoration:none;">
+            金工手作
+        </a>
+    </div>
+    <div class="product-bar-item">
+        <a href="https://www.google.com/" style="text-decoration:none;"><img class="product-bar-img" src="~/img/utensils-solid.png" /></a>
+        <a class="product-bar-item-title" href="https://www.google.com/"style="text-decoration:none;">
+            烹飪教學
+        </a>
+    </div>
+    <div class="product-bar-item">
+        <a href="https://www.google.com/" style="text-decoration:none;"><img class="product-bar-img" src="~/img/running-solid.png" /></a>
+        <a class="product-bar-item-title" href="https://www.google.com/"style="text-decoration:none;">
+            室內跳床
+        </a>
+    </div>
+    <div class="product-bar-item">
+        <a href="https://www.google.com/" style="text-decoration:none;"><img class="product-bar-img" src="~/img/route-solid.png" /></a>
+        <a class="product-bar-item-title" href="https://www.google.com/"style="text-decoration:none;">
+            在地體驗
+        </a>
+    </div>
+    <div class="product-bar-item">
+        <a href="https://www.google.com/" style="text-decoration:none;"><img class="product-bar-img" src="~/img/swimmer-solid.png" /></a>
+        <a class="product-bar-item-title" href="https://www.google.com/"style="text-decoration:none;">
+            水上活動
+        </a>
+    </div>
+    <div class="product-bar-item">
+        <a href="https://www.google.com/" style="text-decoration:none;"><img class="product-bar-img" src="~/img/ticket-alt-solid.png" /></a>
+        <a class="product-bar-item-title" href="https://www.google.com/">
+            票券優惠
+        </a>
+    </div>
+    <div class="product-bar-item">
+        <a href="https://www.google.com/" style="text-decoration:none;"><img class="product-bar-img" src="~/img/child-solid.png" /></a>
+        <a class="product-bar-item-title" href="https://www.google.com/"style="text-decoration:none;">
+            親子育樂
+        </a>
+    </div>
+    <div class="product-bar-item">
+        <a href="https://www.google.com/" style="text-decoration:none;"><img class="product-bar-img" src="~/img/campground-solid.png" /></a>
+        <a class="product-bar-item-title" href="https://www.google.com/"style="text-decoration:none;">
+            戶外活動
+        </a>
+    </div>
+    <div class="product-bar-item">
+        <a href="https://www.google.com/" style="text-decoration:none;"><img class="product-bar-img" src="~/img/cocktail-solid.png" /></a>
+        <a class="product-bar-item-title" href="https://www.google.com/"style="text-decoration:none;">
+            調酒飲料
+        </a>
+    </div>
+</div>
+
+
+
+
+/Product/Product/ProductIndex
+
+<h1 class="Product-classification">測試拉資料-全部</h1>
+<div id="Product-Result-All" class="owl-carousel owl-theme">
+    <div v-for="p in products" :key="p.id">
+        <a class="item mhn-inner" href="#" v-on:click="ReturnProductPage(p.Id)" style="text-decoration:none;">
+            <img style="width:200px;" class="mhn-img" v-bind:src="''+p.ProductPic.PicPath" alt="找不到或連不上圖片">
+            <div class="mhn-text">
+                <h4>{{p.Name}}</h4>
+                <h6>{{p.Description_S}}</h6>
+                <p class="product-detail-description">
+                    {{p.Description_L}}
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    {{p.Price}}NTD
+                </h4>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+
+<h1 class="Product-classification">最新課程優惠</h1>
+<div class="owl-carousel owl-theme">
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?paper">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?fire">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?nature">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?video">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img src="https://source.unsplash.com/600x400/?fire">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img src="https://source.unsplash.com/600x400/?music">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img src="https://source.unsplash.com/600x400/?fire">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?nature">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?video">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?music">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1 class="Product-classification">探索熱門課程</h1>
+<div class="owl-carousel owl-theme">
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?paper">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?fire">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?nature">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?video">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img src="https://source.unsplash.com/600x400/?fire">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img src="https://source.unsplash.com/600x400/?music">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img src="https://source.unsplash.com/600x400/?fire">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?nature">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?video">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?music">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1 class="Product-classification">Top 10 熱門商品</h1>
+<div class="owl-carousel owl-theme">
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?paper">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?fire">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?nature">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?video">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img src="https://source.unsplash.com/600x400/?fire">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img src="https://source.unsplash.com/600x400/?music">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img src="https://source.unsplash.com/600x400/?fire">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?nature">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?video">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?music">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<h1 class="Product-classification">為你精選精選課程</h1>
+<div class="owl-carousel owl-theme">
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?paper">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?fire">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?nature">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?video">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img src="https://source.unsplash.com/600x400/?fire">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img src="https://source.unsplash.com/600x400/?music">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img src="https://source.unsplash.com/600x400/?fire">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?nature">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?video">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="mhn-inner">
+            <div class="mhn-img">
+                <img class="mhn-img" src="https://source.unsplash.com/600x400/?music">
+            </div>
+            <div class="mhn-text">
+                <h4>【特價SLOGAN】</h4>
+                <h6>台灣台北｜以覺學｜銅質手環、銅質戒指傳統金工手作體驗</h6>
+                <p class="product-detail-description">
+                    透過 PAPAGO 訂購金工體驗課程，帶領你前往以覺學 intzuition 金工實驗室，可自由選擇台北復興店由專業金工師傅指導協助製作出屬於自己的紀念性金工飾品，創造出獨特的回憶跟體驗，無論是送禮或是自己用都很適合！
+                </p>
+            </div>
+            <div>
+                <h4 class="product-price">
+                    500NTD
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    //========================VUE=================================//
+
+    var SearchAll = new Vue({
+        el: '#Product-Result-All',
+        data: {
+            products: [],
+        },
+        methods: {
+            ReturnProductPage: function (id) {
+                let data = new FormData();
+                data.append("id", id);
+                fetch("/Product/Product/SelectProductInfo", {
+                    body: data, // must match 'Content-Type' header
+                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                }).then(response => response.text())
+                    .then(function (d) {
+                        window.location.href = "/Product/Product/ProductIndex"
+                    });
+            }
+        },
+        mounted: function () {
+            let self = this;
+            fetch('/Product/Product/GetSelectProductCatogory').then(function (r) { return r.json() })
+                .then(function (r) { self.products = r; });
+        },
+    });
+
+    //window.location.href = "/Product/Product/ProductIndex"
+
+    
+
+
+
+
+
+    //========================VUE=================================//
+</script>
+
+
+<link href="~/css/site.css" rel="stylesheet" />
+<link href="~/css/owl.carousel.css" rel="stylesheet" />
+<link href="~/css/owl.theme.default.css" rel="stylesheet" />
+<script src="~/js/owl.carousel.js"></script>
+
+
+<script>
+
+
+
+
+
+    $(document).ready(function () {
+        $('.owl-carousel').owlCarousel({
+            loop: false,
+            margin: 15,
+            nav: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        })
+
+    });
+
+
+    //var owl = $('.owl-carousel');
+    //$('.item').click(function () {
+    //    window.location.href = "https://www.google.com/maps?constroller=&abc";
+    //})
+
+    AutoHeight.Defaults = {
+        autoHeight: true,
+        autoHeightClass: 'owl-height'
+    };
+
+    $('.owl-carousel').owlCarousel({
+        items: 3,
+        margin: 10,
+        autoHeight: true
+    });
+
+
+
+
+</script>
+
+
+

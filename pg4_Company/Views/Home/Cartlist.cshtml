@@ -1,0 +1,432 @@
+﻿<script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<title>我的購物車</title>
+
+<style>
+    .btnb {
+        float: right;
+        border-radius: 30px;
+        margin-top: 40px;
+        justify-content: space-between
+    }
+
+    .btnc {
+        float: right;
+        border-radius: 30px;
+        margin-top: 40px;
+        justify-content: space-between
+    }
+
+    .car {
+        width: 1240px;
+        margin: 20px auto;
+        background: #FFF;
+    }
+
+        .car .check {
+            width: 50px;
+        }
+
+            .car .check i {
+                color: #fff;
+                display: inline-block;
+                width: 18px;
+                height: 18px;
+                line-height: 18px;
+                border: 1px solid #e0e0e0;
+                margin-left: 24px;
+                background-color: #fff;
+                font-size: 16px;
+                text-align: center;
+                vertical-align: middle;
+                position: relative;
+                top: -1px;
+                cursor: pointer;
+                font-family: "iconfont";
+            }
+
+    .card shadow rounded.card-header {
+        font-family: Arial
+    }
+
+    .paybtn {
+        float: right;
+        border-radius: 30px;
+    }
+</style>
+
+<div class="card shadow rounded" id="cartPanel">
+    <h5 class="card-header">
+        <b>購物車</b>
+    </h5>
+    <div class="card-body">
+        <table class="table">
+            <thead class="table-borderless">
+                <tr>
+                    <th><input type="checkbox" id="checkAll" v-on:change="checkAll()" /></th>
+                    <th>商品編號</th>
+                    <th>商品圖片</th>
+                    <th>商品名稱</th>
+                    <th>使用日期</th>
+                    <th>售價</th>
+                    <th>數量</th>
+                    <th>小計</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(p, i) in cart">
+                    <td><input class="check" v-bind:id="'check_' + i" type="checkbox" v-on:change="countTotal()" /></td>
+                    <td v-bind:id="'id_' + i">{{p.Id}}</td>
+                    <td style="text-align:center;" class="text-center"><img v-bind:src="'' + p.PicPath" alt="Card image cap" height="30" /></td>
+                    <td v-bind:id="'name_' + i">{{p.Name}}</td>
+                    <td>
+                        <span id="startDate"></span>
+                        <span class="price amountClass" v-bind:id="'sDate_' + i"> {{p.StartDate}} </span>
+                    </td>
+                    <td>
+                        <span id="price"></span>
+                        <span class="price amountClass" v-bind:id="'price_' + i"> {{slicePrice(p.Price)}} </span>
+                    </td>
+                    @*to do: 數量加總, 小計, 總計*@
+                    <td>
+                        <input style="width:60px;" class="count" v-bind:id="'count_' + i" v-on:change="countSubTotal()" min="1" value="1" type="number" />
+                        <script>
+                            function count(i) {
+                                console.log(i);
+                                let x = parseFloat($("#price_" + i).text());
+                                let y = $("#count_" + i).val();
+                                console.log(x);
+                                console.log(y);
+                                let total = (x * y).toString();
+                                $("#subTotal_" + i).text(total);
+                            }
+                        </script>
+                    </td>
+                    <td>
+                        <span class="subTotal" v-bind:id="'subTotal_' + i"></span>
+                    </td>
+                    <td id="example-2">
+                        <button id="delete" class="btn btn-danger" v-on:click="del(p.Id)">刪除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <div class="row">
+            <div class="col-4 justify-content-around">
+                <div class="input-group input-group-sm mb-2">
+                    <span style="padding-top:3px">優惠碼：</span>
+                    <input type="text" class="form-control" placeholder="coupon" name="coupon">
+                </div>
+            </div>
+            <div class="col text-right pr-5">
+                <h5>總計：</h5>
+                <h5 class="amountClass" id="amount"></h5>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead class="table-borderless">
+                <tr>
+                    <th>訂單資料</th>
+                </tr>
+            </thead>
+        </table>
+
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label for="fReceiver" class="control-label col-md-2">收件人姓名</label>
+                <div class="col-md-10">
+                    <input id="fReceiver" name="fReceiver" type="text" class="form-control" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fPhone" class="control-label col-md-2">收件人手機</label>
+                <div class="col-md-10">
+                    <input id="fPhone" name="fPhone" class="form-control" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fEmail" class="control-label col-md-2">收件人信箱</label>
+                <div class="col-md-10">
+                    <input id="fEmail" name="fEmail" type="email" class="form-control" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fAddress" class="control-label col-md-2">收件人地址</label>
+                <div class="col-md-10">
+                    <input id="fAddress" name="fAddress" type="tel" class="form-control" required />
+                </div>
+            </div>
+        </div>
+
+        <div class="btnc btnb">
+            <button class="btn btn-primary" v-on:click="pay()">成立訂單</button>
+            <a class="btn btn-dark" href="~/Home/Index">繼續購物</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#cartPanel',
+        data: {
+            cart: [],
+        },
+        mounted: function () {
+            let self = this;
+            self.countSubTotal();
+            fetch("/Home/CartlistContent").then(function (r) { return r.json() })
+                .then(function (r) { self.cart = r }).then(function () { self.countSubTotal() });
+        },
+        methods: {
+            slicePrice: function (UPrice) {
+                var num = 0;
+                var tempPrice = 0;
+                var temp = [];
+                var truePrice;
+                if (UPrice.toString().length <= 3) {
+                    truePrice = UPrice;
+                }
+                else {
+                    if (UPrice.toString().length % 3 != 0) {
+                        num = parseInt(UPrice.toString().length / 3);
+                    } else {
+                        num = parseInt(UPrice.toString().length) / 3 - 1;
+                    }
+                    tempPrice = UPrice;
+                    for (var i = num; i > 0; i--) {
+                        if (tempPrice.toString().length > 3) {
+                            temp[i] = tempPrice.toString().slice(-3);
+                        }
+                        tempPrice = tempPrice.toString().substring(0, tempPrice.toString().length - 3);
+                        temp[0] = tempPrice;
+                    }
+                    truePrice = temp[0];
+                    for (var j = 1; j < num + 1; j++) {
+                        truePrice += ("," + temp[j]);
+                    }
+                }
+                return truePrice;
+            },
+            del: function (id) {
+                console.log("e");
+                var x = confirm("是否確定刪除此商品?");
+                if (x != true)
+                    return false;
+                let self = app;
+                $.ajax({
+                    type: 'POST',
+                    url: "/tocProduct/RemoveItem",
+                    data: {
+                        "id": id
+                    },
+                    success: function (e) {
+                        alert(e);
+                        //location.reload();
+                    },
+                    error: function () {
+                        alert("刪除失敗");
+                    }
+                }).done(function () {
+                    fetch("/Home/CartlistContent").then(function (r) { return r.json() })
+                        .then(function (r) { self.cart = r });
+                })
+            },
+            //訂單成立 抓取要需要的資料
+            pay: function () {
+                var x = confirm("是否成立訂單?");
+                if (x != true)
+                    return false;
+
+                let amount = $("#amount").text();
+                if (amount == 0) {
+                    alert('請勾選欲結帳的商品');
+                    return false;
+                }
+
+                if ($('#fReceiver').val() == '') {
+                    alert('請填寫收件人姓名');
+                    return false;
+                }
+
+                if ($('#fPhone').val() == '') {
+                    alert('請填寫收件人電話');
+                    return false;
+                }
+
+                if ($('#fEmail').val() == '') {
+                    alert('請填寫收件人Email');
+                    return false;
+                }
+
+                if ($('#fAddress').val() == '') {
+                    alert('請填寫收件人地址');
+                    return false;
+                }
+
+                let count = 0;
+
+                var ids = [];
+                var qtys = [];
+                var names = [];
+                var prices = []
+                //把有勾選的商品, id qty name price選出來
+                $(".check").each(function () {
+                    if ($(this).prop('checked')) {
+                        ids.push(parseInt($('#id_' + count).text()));
+                        qtys.push(parseInt($('#count_' + count).val()));
+                        names.push($('#name_' + count).text());
+                        prices.push(parseInt($('#price_' + count).text()));
+                    }
+                    count++;
+                });
+
+                //丟給Home/ThirdPartyPay
+                $.ajax({
+                    type: 'POST',
+                    url: "/Home/ThirdPartyPay",
+                    data: {
+                        "amount": amount,
+                        "ProductIds": ids,
+                        "qtys": qtys,
+                        "ProductNames": names,
+                        "ProductPrices": prices,
+                        "fReceiver": $('#fReceiver').val(),
+                        "fPhone": $('#fPhone').val(),
+                        "fEmail": $('#fEmail').val(),
+                        "fAddress": $('#fAddress').val()
+                    },
+                    success: function (e) {
+                       window.location.href = "/Home/OrderDetail";
+                    },
+                    error: function () {
+                        alert("請先登入您的消費者帳號");
+                        window.location.href = "../Identity/Account/UserLogin"
+                    }
+                });
+            },
+            countSubTotal: function () {
+                let x = 0;
+                $(".price").each(function () {
+                    let count = parseInt($("#price_" + x).text());
+                    let price = $("#count_" + x).val();
+                    let subTotal = count * price;
+                    $("#subTotal_" + x).text(subTotal);
+                    x++;
+                });
+                this.countTotal();
+            },
+            countTotal: function () {
+                let total = 0;
+                let count = 0;
+                $(".check").each(function () {
+                    if ($(this).prop('checked')) {
+                        total += parseInt($('#subTotal_' + count).text());
+                    }
+                    count++;
+                });
+                $("#amount").text(total);
+            },
+            checkAll: function () {
+                $(".check").each(function () {
+                    if ($('#checkAll').prop('checked')) {
+                        $(this).prop('checked', true);
+                    } else {
+                        $(this).prop('checked', false);
+                    }
+                });
+                this.countTotal();
+            },
+            count: function (i) {
+                console.log(i);
+                let x = parseFloat($("#price_" + i).text());
+                let y = $("#count_" + i).val();
+                console.log(x);
+                console.log(y);
+                let total = (x * y).toString();
+                $("#subTotal_" + i).text(total);
+            }
+        }
+    })
+</script>
+
+@*<script>
+    $(function () {
+        countSubTotal();
+    });
+    function del(id) {
+        console.log("e");
+        var x = confirm("是否確定刪除此商品?");
+        if (x != true)
+            return false;
+        $.ajax({
+            type: 'POST',
+            url: "/Product/RemoveItem",
+            data: {
+                "id": id
+            },
+            success: function (e) {
+                alert(e);
+                location.reload();
+            },
+            error: function () {
+                alert("刪除失敗");
+            }
+        });
+    }
+    function pay() {
+        let amount = $("#amount").text();
+        var x = confirm("是否成立訂單?");
+        if (x != true)
+            return false;
+        $.ajax({
+            type: 'POST',
+            url: "/Home/payAmount",
+            data: {
+                "amount": amount
+            },
+            success: function (e) {
+                window.location.href = "/Home/Orderlist";
+            },
+            error: function () {
+                alert("刪除失敗");
+            }
+        });
+    }
+    function countSubTotal() {
+        let x = 0;
+        $(".price").each(function () {
+            let count = parseInt($("#price_" + x).text());
+            let price = $("#count_" + x).val();
+            let subTotal = count * price;
+            $("#subTotal_" + x).text(subTotal);
+            x++;
+        });
+        countTotal();
+    }
+    function countTotal() {
+        let total = 0;
+        let count = 0;
+        $(".check").each(function () {
+            if ($(this).prop('checked')) {
+                total += parseInt($('#subTotal_' + count).text());
+            }
+            count++;
+        });
+        $("#amount").text(total);
+    }
+    function checkAll() {
+        $(".check").each(function () {
+            if ($('#checkAll').prop('checked')) {
+                $(this).prop('checked', true);
+            } else {
+                $(this).prop('checked', false);
+            }
+        });
+        countTotal();
+    }
+</script>*@

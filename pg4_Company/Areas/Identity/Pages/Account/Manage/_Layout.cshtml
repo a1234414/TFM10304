@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Project_TFM10304.Models.Users> SignInManager
+@inject UserManager<Project_TFM10304.Models.Users> UserManager
+@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+<div style="width: 100%; background: linear-gradient(to right, rgba(200,200,200,0), rgba(200,200,200,0.6)); ">
+    @*background-color: rgba(200,200,200,0.25)*@
+    <img src="~/img/user-circle-solid.png" style="height:150px;margin-left:5%;" />
+    <div style="margin-left: 5%;">@User.Identity.Name</div>
+</div>
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <partial name="_ManageNav" />
+        </div>
+        <div class="col-md-9">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

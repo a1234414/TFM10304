@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Project_TFM10304.Models.Users> SignInManager
+@inject UserManager<Project_TFM10304.Models.Users> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-signin-client_id" content="403118786851-ot5s3leecq2oa6id3psv3vvk3u085dau.apps.googleusercontent.com">
+    <title>@ViewData["Title"] - Papago</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/site1.css" rel="stylesheet" />
+    <link href="~/css/test.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site2.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.1/main.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/moment.js"></script>
+</head>
+<body>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <div style="padding-bottom:60px">
+            <div style="display:flex; justify-content:space-between; width:100%;height:60px;position:fixed;background-color:white;z-index:99999999;">
+                <a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/pic/PAPAG_logo-想趣玩-06.png" class="index-logo"></a>
+                <div style="display:flex;flex-wrap:wrap;align-items:center">
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+
+    }
+
+
+    <div>
+        <main style="overflow:hidden">
+            @RenderBody()
+        </main>
+    </div>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]  PAPAGO | 享趣玩</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!----axios-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script> <!----VUE-->
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>  <!----Jquery-->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="~/picture/favicon.png" type="image/x-icon" />
+    <style>
+        /* Dropdown Button */
+        .dropbtn {
+            color: white;
+            font-size: 16px;
+            border: none;
+        }
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 250px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 9999;
+        }
+
+
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                /* Change color of dropdown links on hover */
+                .dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {
+            background-color: #8cc2f5;
+        }
+
+        .dropdown-menu-end {
+            right: 0;
+            left: auto;
+        }
+
+        .panel {
+            height: 60vh;
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3" style="height: 50px">
+            <a class="navbar-brand" href="~/Home/Index">
+                <img src="~/pic/PAPAG_logo-想趣玩-06.png" style="width: 200px;" class="d-inline-block align-top" alt="logo">
+            </a>
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    @*卡購物車位置*@
+                    <ul class="navbar-nav flex-grow-1">
+                    </ul>
+                    <div id="cartMenu">
+                        <div class="dropdown">
+
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Cartlist">
+                                <img style="width: 32px; height: 32px;align-items:center;" src="~/pic/購物車.png" />
+                                <div class="badge bg-info">{{product.length}}</div>
+                            </a>
+
+                            <div class="dropdown-content" style="overflow-y:scroll">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <a asp-controller="Home" asp-action="Cartlist" class="btn btn-primary">查看購物車</a>
+                                    </div>
+                                    <div class=" panel-body ">
+                                        <div v-for="p in product" class="card" style="width: 17rem;">
+                                            <img :src="p.imagePath" class="card-img-top" alt="">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{p.productName}}</h5>
+                                                <p class="card-text">{{p.description_S}}</p>
+                                                <p class="card-text">{{p.price}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <div class="card-footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <p style="line-height: 20px;">
+            <a href="https://www.kkday.com/static/zh-tw/about/privacy.html">隱私權政策</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="https://www.kkday.com/zh-tw/product/productlist?cat=TAG_2_1&sort=prec">網路安全政策</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="https://www.kkday.com/zh-tw/product/productlist?cat=TAG_2_1&sort=prec">網站導覽</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;瀏覽人次:588<br>
+            <i class=" fa fa-handshake-o "></i>&nbsp;服務時間：AM9:00~PM6:00 &nbsp;&nbsp;|&nbsp;&nbsp;
+            <i class=" fa fa-envelope-o "></i>&nbsp;聯絡信箱：papago@papago.com<br>
+            <i class=" fa fa-phone "></i>&nbsp;連絡電話：0800-875-975<br>
+            <br>
+            (C)2021 PAPAGO股份有限公司版權所有<br>
+            建議使用IE10 以上版本之瀏覽器，螢幕解析度1024X768以上瀏覽<br>
+        </p>
+        <input type="checkbox" name="" id="map-switch">
+        <div style="display:block" id="maptxt">
+            <table>
+                <tr class="title">
+                    <td>PAPAGO合作夥伴</td>
+                    <td>認識PAPAGO</td>
+                    <td>常見問題</td>
+                    <td>合作計畫</td>
+                </tr>
+                <tr class="text">
+                    <td><a asp-area="" asp-controller="CompanyHome" asp-action="Index">供應商登入</a></td>
+                    <td><a href="https://www.kkday.com/zh-tw/product/productlist?cat=TAG_2_1&sort=prec">PAPAGO合作夥伴</a></td>
+                    <td><a href="https://www.kkday.com/zh-tw/product/productlist?cat=TAG_2_1&sort=prec">常見問題</a></td>
+                    <td><a href="https://www.kkday.com/zh-tw/product/productlist?cat=TAG_2_1&sort=prec">會員購物折扣</a></td>
+                </tr>
+                <tr class="text">
+                    <td><a asp-controller="CompanyUser" asp-action="Index">成為供應商</a></td>
+                    <td><a href="https://www.kkday.com/zh-tw/product/productlist?cat=TAG_2_1&sort=prec">關於PAPAGO</a></td>
+                    <td><a href="#">聯絡我們</a></td>
+                    <td><a href="https://www.kkday.com/zh-tw/product/productlist?cat=TAG_2_1&sort=prec">場地租借</a></td>
+                </tr>
+                <tr class="text">
+                    <td><a href="https://www.kkday.com/static/zh-tw/about/privacy.html">隱私權保護政策</a></td>
+                </tr>
+            </table>
+        </div>
+    </footer>
+    <script>
+        $(function () {
+            $("#btn1").click(function () {
+                $("#btn1").addClass("active");
+                $("#btn2").removeClass("active");
+                $("#table2").hide();
+                $("#table1").show();
+            });
+            $("#btn2").click(function () {
+                $("#btn1").removeClass("active");
+                $("#btn2").addClass("active");
+                $("#table1").hide();
+                $("#table2").show();
+            });
+        });
+        var vcart = new Vue({
+            el: '#cartMenu',
+            data: {
+                product: [],
+                count: 3
+            },
+            mounted: function () {
+                this.GetCartProduct();
+            },
+            methods: {
+                GetCartProduct: function () {
+                    let self = this;
+                    fetch("/tocProduct/GetCart")
+                        .then(function (res) { return res.json() })
+                        .then(function (d) { self.product = d })
+                }
+            }
+        })
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

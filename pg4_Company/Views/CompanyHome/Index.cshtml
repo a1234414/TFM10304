@@ -1,0 +1,114 @@
+﻿<div class="container-fluid" id="homePanel">
+    @*首頁的內容: 即將到來訂單 && 最近完成訂單*@
+    <div class="input-group mb-3">
+        <span class="input-group-text">即將到來</span>
+        <span class="input-group-text">天數：</span>
+        <input type="number" class="form-control" value="5" v-model="comingDays">
+        <span class="input-group-text" v-on:click="fetchComingDays">查詢</span>
+        <span class="input-group-text">預計總收入： {{comingIncome}}</span>
+    </div>
+    <div>
+        <table class="table">
+            <tr class="table-primary">
+                <td class="col-md-2">開始時間</td>
+                <td class="col-md-2">活動名稱</td>
+                <td class="col-md-2">預計人數</td>
+                <td class="col-md-2">預計收入</td>
+            </tr>
+            <tr v-for="item in comingOrders">
+                <td>{{item.date}}</td>
+                <td>{{item.productName}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.totalPrice}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="input-group mb-3">
+        <hr />
+        <span class="input-group-text">近期完成</span>
+        <span class="input-group-text">天數：</span>
+        <input type="number" class="form-control" value="5" v-model="passedDays">
+        <span class="input-group-text" v-on:click="fetchPassedDays">查詢</span>
+        <span class="input-group-text">總收入: {{passedIncome}}</span>
+    </div>
+    <div>
+        <table class="table">
+            <tr class="table-primary">
+                <td class="col-md-2">日期</td>
+                <td class="col-md-2">活動名稱</td>
+                <td class="col-md-2">人數</td>
+                <td class="col-md-2">收入</td>
+            </tr>
+            <tr v-for="item in passedOrders">
+                <td>{{item.date}}</td>
+                <td>{{item.productName}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.totalPrice}}</td>
+            </tr>
+        </table>
+        <hr />
+    </div>
+</div>
+
+<script>
+    var app = new Vue(
+        {
+            el: '#homePanel',
+            data: {
+                comingOrders: [],
+                comingDays: 5,
+                comingIncome: 0,
+                passedOrders: [],
+                passedDays: 5,
+                passedIncome: 0
+            },
+            methods: {
+                fetchComingDays: function () {
+                    let self = this;
+                    let days = self.comingDays;
+                    fetch('/CompanyHome/ComingOrders/' + '?comingDays=' + days)
+                        .then(function (res) { return res.json() })
+                        .then(function (o) {
+                            self.comingOrders = o;
+                            self.comingIncome = 0;
+                            o.forEach(op => self.comingIncome += op.totalPrice);
+                        });
+                },
+                fetchPassedDays: function () {
+                    let self = this;
+                    let days = self.passedDays;
+                    fetch('/CompanyHome/PassedOrders/' + '?passedDays=' + days)
+                        .then(function (res) { return res.json() })
+                        .then(function (o) {
+                            self.passedOrders = o;
+                            self.passedIncome = 0;
+                            o.forEach(op => self.passedIncome += op.totalPrice);
+                        });
+                },
+                numberWithCommas: function (x) {
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
+            },
+            //mounted時抓取初始資料
+            mounted: function () {
+                let self = this;
+                let comingDays = self.comingDays;
+                fetch('/CompanyHome/ComingOrders/' + '?comingDays=' + comingDays)
+                    .then(function (res) { return res.json() })
+                    .then(function (o) {
+                        self.comingOrders = o;
+                        self.comingIncome = 0;
+                        o.forEach(op => self.comingIncome += op.totalPrice);
+                    });
+                let passedDays = self.passedDays;
+                fetch('/CompanyHome/PassedOrders/' + '?passedDays=' + passedDays)
+                    .then(function (res) { return res.json() })
+                    .then(function (o) {
+                        self.passedOrders = o;
+                        self.passedIncome = 0;
+                        o.forEach(op => self.passedIncome += op.totalPrice);
+                    });
+            }
+        }
+    );
+</script>

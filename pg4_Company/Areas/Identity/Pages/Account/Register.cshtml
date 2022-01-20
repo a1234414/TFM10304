@@ -1,0 +1,65 @@
+﻿@page
+@model RegisterModel
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Project_TFM10304.Models.Users> SignInManager
+@inject UserManager<Project_TFM10304.Models.Users> UserManager
+    <script>
+        function Change_LoginSize() {
+            var loginheight = window.innerHeight;
+            for (var i = 1; i <= 3; i++) {
+                var login_idwidth = $("#login_id")[0].clientWidth;
+                $("#fb_btn" + i).css("width", login_idwidth);
+            }
+            $(".login-body-user").css("height", loginheight);
+        }
+    </script>
+@if (SignInManager.IsSignedIn(User))
+{
+    <script>
+    window.onload = function () {
+        window.location.replace("https://localhost:44356/")
+    }
+    </script>
+}
+else
+{
+    <div class="login-body-user">
+        <div class="login">
+            <form class="form" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h2 style="color:white">一般會員注冊</h2>
+                <div class="loginGroup">
+                    <label>
+                        帳號
+                        <input id="login_id" asp-for="Input.Email" class="form-control" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </label>
+                </div>
+                <div class="loginGroup">
+                    <label>
+                        密碼
+                        <input asp-for="Input.Password" class="form-control" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </label>
+                </div>
+                <div class="loginGroup">
+                    <label>
+                        確認密碼
+                        <input asp-for="Input.ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </label>
+                </div>
+                <div class="btnGroup">
+                    <button type="submit" class="vertify-btn">註冊</button>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(Change_LoginSize());
+</script>
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }

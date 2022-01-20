@@ -1,0 +1,18 @@
+﻿@inject SignInManager<Project_TFM10304.Models.Users> SignInManager
+@using System.Security.Claims;
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+
+    ClaimsPrincipal thisUser = this.User;
+    bool isCompany = thisUser.IsInRole("Company");
+}
+<ul class="nav nav-pills flex-column">
+    <li class="nav-item"><a style=" font-family: Microsoft YaHei,sans-serif;" class="nav-link @Project_TFM10304.Areas.Identity.Pages.Account.Manage.ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">個人信息</a></li>
+    <li class="nav-item"><a style=" font-family: Microsoft YaHei,sans-serif;" class="nav-link @Project_TFM10304.Areas.Identity.Pages.Account.Manage.ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">E-mail變更</a></li>
+    <li class="nav-item"><a style=" font-family: Microsoft YaHei,sans-serif;" class="nav-link @Project_TFM10304.Areas.Identity.Pages.Account.Manage.ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">密碼變更</a></li>
+    @{ if (isCompany)
+        {
+        <li class="nav-item"><a style=" font-family: Microsoft YaHei,sans-serif;" class="nav-link" href="~/CompanyUser/Manage">管理商家資料</a></li>
+        }
+    }
+</ul>
