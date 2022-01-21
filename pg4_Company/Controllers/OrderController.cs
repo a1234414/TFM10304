@@ -44,21 +44,14 @@ namespace Project_TFM10304.Controllers
                 var userId = thisUser.FindFirst(ClaimTypes.NameIdentifier).Value;
 
                 //join [order, orderDetail, Product], groupby(product.name), 將orderDetail.quantity加總
-                var ordersGroups = _dbContext.Order
-                    .Join(_dbContext.OrderDetail, o => o.OrderId, od => od.OrderId, (o, od) =>
+                var ordersGroups = _dbContext.OrderDetail
+                    .Join(_dbContext.Product, od => od.ProductId, p => p.Id, (od, p) =>
                     new
                     {
-                        id = o.OrderId,
-                        productId = od.ProductId,
-                        quantity = od.Quantity,
-                    })
-                    .Join(_dbContext.Product, od => od.productId, p => p.Id, (od, p) =>
-                    new
-                    {
-                        oid = od.id,
+                        oid = od.OrderId,
                         productName = p.Name,
                         price = p.Price,
-                        quantity = od.quantity,
+                        quantity = od.Quantity,
                         psdate = p.StartDate,
                         pedate = p.EndDate,
                         cid = p.CompanyUserId
